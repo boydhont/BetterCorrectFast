@@ -38,23 +38,27 @@ def _get_topic(title, description, author="BetterCorrectFast", topic_type="Issue
         topic_status=topic_status
     )
 
-    #viewpoint = _get_viewpoint() # TODO activate # TODO add user input for the picture
+    visualization_info_handler = _get_visualization_info_handler() # TODO activate # TODO add user input for the picture
     
     # Add the elements
-    #topic.add_visinfo_handler(viewpoint, snapshot_filename="snapshot.jpg") # TODO activate # TODO make the filename dynamic # TODO just type the stuf that is in there
+    topic.add_visinfo_handler(visualization_info_handler, snapshot_filename="snapshot.png") # TODO activate # TODO make the filename dynamic # TODO just type the stuf that is in there
  
     return topic
 
-def _get_viewpoint(): # A Viewpoint is called VisualizationInfoHandler in IfcOpenShell for some reason
+def _get_visualization_info_handler(): # A Viewpoint is called VisualizationInfoHandler in IfcOpenShell for some reason
     # TODO get the snapshot etc
     # Create elements
     
+    
+    image_bytes = _get_image_bytes_from_filepath(_get_default_snapshot_path()) #TODO debug, do this clean
+    
     visualization_info = _get_visualization_info()
     
-    viewpoint = VIS.VisualizationInfoHandler(visualization_info) # TODO add the snapshot?
+    visualization_info_handler = VIS.VisualizationInfoHandler(visualization_info, snapshot=image_bytes ) # TODO add the snapshot?
     # TODO add the visualizationinfo and add it to the viewpoint
     
-    return viewpoint
+    
+    return visualization_info_handler
 
 def _get_image_bytes_from_filepath(filepath):
     with open(filepath, "rb") as image_file:
@@ -64,15 +68,14 @@ def _get_visualization_info(): # TODO add the bitmaps dynamically
     
     visualization_info = MDL.VisualizationInfo(
         guid=str(uuid.uuid4()),  # Generate a random GUID
-        # TODO add bitmaps and stuff
     )
     
     return visualization_info
 
-def _get_bitmap_from_filepath(filepath): # TODO add support for more filetypes than .jpg
+def _get_visualization_bitmap_from_filepath(filepath): # TODO add support for more filetypes than .jpg
     
-    bitmap = MDL.Bitmap(
-        format=MDL.BitmapFormat.JPG,
+    bitmap = MDL.VisualizationInfoBitmap(
+        bitmap=MDL.BitmapFormat.PNG, # TODO add suppor for more formats
         reference=filepath,
         location=MDL.Point(x=0.0, y=0.0, z=0.0),  # Set your actual location here
         normal=MDL.Direction(x=0.0, y=0.0, z=1.0),  # Set your actual normal here
@@ -85,7 +88,7 @@ def _get_bitmap_from_filepath(filepath): # TODO add support for more filetypes t
 def _get_default_snapshot_path(): # TODO change to icon
     
     current_file = Path(__file__).resolve()
-    snapshot_path = current_file.parent / 'assets' / 'snapshot.jpg'
+    snapshot_path = current_file.parent / 'assets' / 'icon.png'
 
     print(f"The default snapshot file is being used {'and is located' if snapshot_path.exists() else ', but was not found'} at: {snapshot_path}") # User feedback
     
