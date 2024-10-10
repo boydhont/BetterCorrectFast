@@ -8,21 +8,26 @@
 # TODO delete this icon.png later on
 
 import bcf.v3.bcfxml as BCF # type: ignore
+import bcf.v3.topic as TOPIC # type: ignore
 
 from pathlib import Path
 
 def create(title="BetterCorrectFast: Check this out!", description="Automatically generated topic by BetterCorrectFast", project_name=""): # TODO come up with a better alias # TODO come up with better placeholder values
     
+    # Create the elements
     bcf = BCF.BcfXml().create_new(project_name)
-    topic = _add_topic(bcf, title, description)
+    topic = _get_topic(title, description)
+    
+    # Add the elements
+    bcf.topics[topic.guid] = topic
 
-    default_snapshot_path = _get_default_snapshot_path() 
+    #default_snapshot_path = _get_default_snapshot_path() # TODO delete 
 
     return bcf
 
-def _add_topic(bcf, title, description, author="BetterCorrectFast", topic_type="Issue", topic_status="Open"): # TODO come up with better placeholder values
+def _get_topic(title, description, author="BetterCorrectFast", topic_type="Issue", topic_status="Open"): # TODO come up with better placeholder values
 
-    topic = bcf.add_topic(
+    topic = TOPIC.TopicHandler().create_new(
         title=title,
         description=description,
         author=author,
@@ -30,6 +35,8 @@ def _add_topic(bcf, title, description, author="BetterCorrectFast", topic_type="
         topic_status=topic_status
     )
 
+    # topic.add_viewpoint(None) # TODO define the viewpoint
+    
     return topic
 
 def _get_default_snapshot_path():
