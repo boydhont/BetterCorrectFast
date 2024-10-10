@@ -6,23 +6,27 @@
 
 # TODO does not work with snapshot yet
 
-import bcf.v3.bcfxml as BCF # type: ignore # TODO concider better alias
+import bcf.v3.bcfxml as BCF # type: ignore
 
-def create(): # TODO come up with a better alias
-    bcf = BCF.BcfXml() # TODO might this bcf and new_bcf not be double?
-    new_bcf = bcf.create_new("LKJDLFJ") # TODO set input for a project name
+def create(title="BetterCorrectFast: Check this out!", description="Automatically generated topic by BetterCorrectFast", project_name=""): # TODO come up with a better alias # TODO come up with better placeholder values
+    
+    bcf = BCF.BcfXml().create_new(project_name)
+    topic = _add_topic(bcf, title, description)
 
-    # Get topic # TODO do this in another def
-    new_topic = new_bcf.add_topic(
-        title="New Topic Title",
-        description="This is a description of the new topic.",
-        author="John Doe", # This might be redundant
-        topic_type="Issue", # This might be redundant
-        topic_status="Open" # This might be redundant
+    return bcf
+
+def _add_topic(bcf, title, description, author="BetterCorrectFast", topic_type="Issue", topic_status="Open"): # TODO come up with better placeholder values
+
+    topic = bcf.add_topic(
+        title=title,
+        description=description,
+        author=author,
+        topic_type=topic_type,
+        topic_status=topic_status
     )
 
-    return new_bcf
+    return topic
 
-def save(bcf): # TODO add a filename as an input
-    bcf.save("test.bcf")
+def save(bcf, filename):
+    bcf.save(filename)
     # TODO add user output
