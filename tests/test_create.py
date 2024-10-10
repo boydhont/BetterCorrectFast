@@ -1,6 +1,6 @@
-# tests/test_hello.py
+# tests/test_create.py
 import unittest
-from better_correct_fast import say_hello
+from better_correct_fast import *
 from io import StringIO
 import sys
 
@@ -11,7 +11,8 @@ class TestHello(unittest.TestCase):
         sys.stdout = captured_output
         
         # Call the function
-        say_hello()
+        debug_bcf = create()
+        print(debug_bcf)
         
         # Reset redirect
         sys.stdout = sys.__stdout__
