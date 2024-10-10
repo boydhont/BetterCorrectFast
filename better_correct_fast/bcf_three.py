@@ -4,7 +4,7 @@
 # A wrapper for the undocumented IfcOpenShell wrapper
 # https://github.com/IfcOpenShell/IfcOpenShell/blob/v0.8.0/src/bcf/bcf/v3/bcfxml.py
 
-# TODO does not work with snapshot yet
+# TODO does not work with snapshot yet. Snapshots are part of the viewport element with the name "snapshot.jpg". It will be included in the archive under the folder named after top_guid. It is supposed to be saved in the ViewPoint, under "Snapshot", then the text as "snapshot.jpg"
 
 import bcf.v3.bcfxml as BCF # type: ignore
 
