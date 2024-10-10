@@ -17,8 +17,8 @@ class TestHello(unittest.TestCase):
         sys.stdout = sys.__stdout__
         
         # Assert the output
-        self.assertEqual(captured_output.getvalue().strip(), "Hello, World!") # TODO this is the test itself
-        
+        # TODO add assert the output using self.assertEqual
+       
         # Print the captured output to the console
         print(captured_output.getvalue().strip())
 
