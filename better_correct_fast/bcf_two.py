@@ -1,4 +1,4 @@
-# better_correct_fast/bcf_three.py
+# better_correct_fast/bcf_two.py
 # -*- coding: utf-8 -*-
 
 # A wrapper for the undocumented IfcOpenShell wrapper
@@ -9,10 +9,10 @@
 
 import uuid
 
-import bcf.v3.bcfxml as BCF # type: ignore
-import bcf.v3.topic as TOPIC # type: ignore
-import bcf.v3.visinfo as VIS # type:ignore
-import bcf.v3.model as MDL # type: ignore
+import bcf.v2.bcfxml as BCF # type: ignore
+import bcf.v2.topic as TOPIC # type: ignore
+import bcf.v2.visinfo as VIS # type:ignore
+import bcf.v2.model as MDL # type: ignore
 
 from pathlib import Path
 
@@ -38,10 +38,10 @@ def _get_topic(title, description, author="BetterCorrectFast", topic_type="Issue
         topic_status=topic_status
     )
 
-    viewpoint = _get_viewpoint() # TODO add user input for the picture
+    #viewpoint = _get_viewpoint() # TODO activate # TODO add user input for the picture
     
     # Add the elements
-    topic.add_visinfo_handler(viewpoint) # TODO make the filename dynamic # TODO just type the stuf that is in there
+    #topic.add_visinfo_handler(viewpoint, snapshot_filename="snapshot.jpg") # TODO activate # TODO make the filename dynamic # TODO just type the stuf that is in there
  
     return topic
 
@@ -56,16 +56,15 @@ def _get_viewpoint(): # A Viewpoint is called VisualizationInfoHandler in IfcOpe
     
     return viewpoint
 
+def _get_image_bytes_from_filepath(filepath):
+    with open(filepath, "rb") as image_file:
+        return image_file.read()
+
 def _get_visualization_info(): # TODO add the bitmaps dynamically
-    
-    # Create elements
-    snapshot_filepath = _get_default_snapshot_path()# TODO do dynamic over input variable
-    # TODO add checks for the file format
-    bitmap = _get_bitmap_from_filepath(snapshot_filepath) 
     
     visualization_info = MDL.VisualizationInfo(
         guid=str(uuid.uuid4()),  # Generate a random GUID
-        bitmaps = MDL.VisualizationInfoBitmaps(bitmap=[bitmap]) # The VisualizationInfoBitmaps is just some controlled array that hold multiple bitmaps
+        # TODO add bitmaps and stuff
     )
     
     return visualization_info
