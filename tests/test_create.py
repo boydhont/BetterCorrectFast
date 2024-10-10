@@ -13,7 +13,7 @@ class TestCreate(unittest.TestCase):
         # Call the function
         debug_bcf = create()
         print(debug_bcf)
-        save(debug_bcf, "debug.bcf")# TODO delete this from the test
+        save(debug_bcf, "tests/debug.bcf")# TODO delete this from the test
         
         # Reset redirect
         sys.stdout = sys.__stdout__
