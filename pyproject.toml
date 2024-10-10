@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "better_correct_fast"
+version = "0.1.0"
+description = "Simplified BIM Collaboration Format (BCF) generation for project leaders and managers"
+authors = [
+    { name = "Boy d'Hont", email = "contact@bdhont.net" },
+]
+license = { text = "MIT" }  # Specify your license type
+requires-python = ">=3.6"
+dependencies = [
+    "ifcopenshell",  # Required dependency
+]
+
+[tool.setuptools]
+package-dir = {"" = "better_correct_fast"}
