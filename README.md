@@ -1,7 +1,39 @@
 # BetterCorrectFast
 Simplified BIM Collaboration Format (BCF) generation for project leaders and managers
 
-## Building the package
+## Usage
+
+Install the library:
+```
+pip install bettercorrectfast
+```
+
+Create and save an issue locally:
+```
+import bettercorrectfast as bcf
+
+issue = bcf.create("Title", "Description", "Screenshot.jpg")
+issue.save("issue.bcf")
+```
+
+It is also possible to add a title, description and/or snapshot to the issue:
+
+```
+issue_from_text = bcf.create("Title", "Description")
+
+issue_from_title = bcf.create(title="Title)
+issue_from_description = bcf.create(description="Description")
+issue_from_image = bcf.create(image_filepath="Screenshot.jpg")
+```
+
+## Technical Notes
+
+The issue schema conforms to the BCF (BIM Collaboration Format) version 2.0 standard as defined by buildingSMART International.
+
+**Note:** This library currently supports image snapshots exclusively in .jpg format. Support for .png format is under development.
+
+## Building the Package
+
 Setting up a virtual environment:
 ```
 python -m venv venv

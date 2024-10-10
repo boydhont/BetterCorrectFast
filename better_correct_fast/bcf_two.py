@@ -16,18 +16,18 @@ import bcf.v2.model as MDL # type: ignore
 
 from pathlib import Path
 
-def create(title="BetterCorrectFast: Check this out!", description="Automatically generated topic by BetterCorrectFast", project_name=""): # TODO come up with a better alias # TODO come up with better placeholder values
+def create(title="BetterCorrectFast: Check this out!", description="Automatically generated topic by BetterCorrectFast", image_filepath=None, project_name=""): # TODO come up with a better alias # TODO come up with better placeholder values
     
     # Create the elements
     bcf = BCF.BcfXml().create_new(project_name)
-    topic = _get_topic(title, description)
+    topic = _get_topic(title, description, image_filepath)
     
     # Add the elements
     bcf.topics[topic.guid] = topic
 
     return bcf
 
-def _get_topic(title, description, author="BetterCorrectFast", topic_type="Issue", topic_status="Open"): # TODO come up with better placeholder values
+def _get_topic(title, description, image_filepath, author="BetterCorrectFast", topic_type="Issue", topic_status="Open"): # TODO come up with better placeholder values
 
     # Create the elements
     topic = TOPIC.TopicHandler().create_new(
@@ -38,25 +38,21 @@ def _get_topic(title, description, author="BetterCorrectFast", topic_type="Issue
         topic_status=topic_status
     )
 
-    visualization_info_handler = _get_visualization_info_handler() # TODO activate # TODO add user input for the picture
+    visualization_info_handler = _get_visualization_info_handler(image_filepath) # TODO insert the image filepath here # TODO add user input for the picture
     
     # Add the elements
-    topic.add_visinfo_handler(visualization_info_handler, snapshot_filename="snapshot.png") # TODO activate # TODO make the filename dynamic # TODO just type the stuf that is in there
+    topic.add_visinfo_handler(visualization_info_handler, snapshot_filename="snapshot.png")
  
     return topic
 
-def _get_visualization_info_handler(): # A Viewpoint is called VisualizationInfoHandler in IfcOpenShell for some reason
-    # TODO get the snapshot etc
-    # Create elements
-    
-    
-    image_bytes = _get_image_bytes_from_filepath(_get_default_snapshot_path()) #TODO debug, do this clean
+def _get_visualization_info_handler(image_filepath):
     
     visualization_info = _get_visualization_info()
     
-    visualization_info_handler = VIS.VisualizationInfoHandler(visualization_info, snapshot=image_bytes ) # TODO add the snapshot?
-    # TODO add the visualizationinfo and add it to the viewpoint
+    image_filepath = image_filepath if image_filepath is not None else _get_default_snapshot_path()
+    image_bytes = _get_image_bytes_from_filepath(image_filepath)
     
+    visualization_info_handler = VIS.VisualizationInfoHandler(visualization_info, snapshot=image_bytes )
     
     return visualization_info_handler
 
@@ -64,26 +60,13 @@ def _get_image_bytes_from_filepath(filepath):
     with open(filepath, "rb") as image_file:
         return image_file.read()
 
-def _get_visualization_info(): # TODO add the bitmaps dynamically
+def _get_visualization_info():
     
     visualization_info = MDL.VisualizationInfo(
         guid=str(uuid.uuid4()),  # Generate a random GUID
     )
     
     return visualization_info
-
-def _get_visualization_bitmap_from_filepath(filepath): # TODO add support for more filetypes than .jpg
-    
-    bitmap = MDL.VisualizationInfoBitmap(
-        bitmap=MDL.BitmapFormat.PNG, # TODO add suppor for more formats
-        reference=filepath,
-        location=MDL.Point(x=0.0, y=0.0, z=0.0),  # Set your actual location here
-        normal=MDL.Direction(x=0.0, y=0.0, z=1.0),  # Set your actual normal here
-        up=MDL.Direction(x=0.0, y=1.0, z=0.0),  # Set your actual up vector here
-        height=1080.0,  # TODO Set your actual height here
-    )
-    
-    return bitmap
 
 def _get_default_snapshot_path(): # TODO change to icon
     
@@ -93,7 +76,3 @@ def _get_default_snapshot_path(): # TODO change to icon
     print(f"The default snapshot file is being used {'and is located' if snapshot_path.exists() else ', but was not found'} at: {snapshot_path}") # User feedback
     
     return str(snapshot_path)
-
-def save(bcf, filename):
-    bcf.save(filename)
-    # TODO add user output
