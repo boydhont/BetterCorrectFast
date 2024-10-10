@@ -5,7 +5,7 @@ from io import StringIO
 import sys
 
 class TestCreate(unittest.TestCase):
-    def test_say_hello(self):
+    def test_create(self):
         # Redirect stdout to capture print output
         captured_output = StringIO()
         sys.stdout = captured_output
