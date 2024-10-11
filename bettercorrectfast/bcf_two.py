@@ -51,14 +51,17 @@ def _get_visualization_info_handler(image_filepath):
     
     image_filepath = image_filepath if image_filepath is not None else _get_default_snapshot_path()
     image_bytes = _get_image_bytes_from_filepath(image_filepath)
-    
+
     visualization_info_handler = VIS.VisualizationInfoHandler(visualization_info, snapshot=image_bytes )
     
     return visualization_info_handler
 
 def _get_image_bytes_from_filepath(filepath):
-    with open(filepath, "rb") as image_file:
-        return image_file.read()
+    try:
+        with open(filepath, "rb") as image_file:
+            return image_file.read()
+    except:
+        return None # TODO check if return None is ok to begin with
 
 def _get_visualization_info():
     
@@ -68,11 +71,13 @@ def _get_visualization_info():
     
     return visualization_info
 
-def _get_default_snapshot_path(): # TODO change to icon
+def _get_default_snapshot_path(): # TODO might be unsafe if the filepath does not exits
     
     current_file = Path(__file__).resolve()
     snapshot_path = current_file.parent / 'assets' / 'icon.png'
 
-    print(f"The default snapshot file is being used {'and is located' if snapshot_path.exists() else ', but was not found'} at: {snapshot_path}") # User feedback
+    snapshot_path_exists = snapshot_path.exists()
+    print(f"The default snapshot file is being used {'and is located' if snapshot_path_exists else ', but was not found'} at: {snapshot_path}") # User feedback
     
+    if not snapshot_path_exists: return None
     return str(snapshot_path)

@@ -30,7 +30,7 @@ issue_from_image = bcf.create(image_filepath="Screenshot.jpg")
 
 The issue schema conforms to the BCF (BIM Collaboration Format) version 2.0 standard as defined by buildingSMART International.
 
-**Note:** This library currently supports image snapshots exclusively in .jpg format. Support for .png format is under development.
+**Note:** This library currently supports image snapshots exclusively in .png format. Support for .jpg format is under development.
 
 ## Building the Package
 
