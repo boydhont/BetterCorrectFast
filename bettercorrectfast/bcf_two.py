@@ -1,18 +1,15 @@
-# better_correct_fast/bcf_two.py
+# bettercorrectfast/bcf_two.py
 # -*- coding: utf-8 -*-
 
 # A wrapper for the undocumented IfcOpenShell wrapper
-# https://github.com/IfcOpenShell/IfcOpenShell/blob/v0.8.0/src/bcf/bcf/v3/bcfxml.py
-
-# TODO does not work with snapshot yet. Snapshots are part of the viewport element with the name "snapshot.jpg". It will be included in the archive under the folder named after top_guid. It is supposed to be saved in the ViewPoint, under "Snapshot", then the text as "snapshot.jpg"
-# TODO delete this icon.png later on
+# https://github.com/IfcOpenShell/IfcOpenShell/blob/v0.8.0/src/bcf/bcf/v2/bcfxml.py
 
 import uuid
 
-import bcf.v2.bcfxml as BCF # type: ignore
-import bcf.v2.topic as TOPIC # type: ignore
-import bcf.v2.visinfo as VIS # type:ignore
-import bcf.v2.model as MDL # type: ignore
+import bcf.v2.bcfxml as BCF # type: ignore # TODO the ifcopenshell part is messing up, duplicate the libraries locally instead
+import bcf.v2.topic as TOPIC # type: ignore # TODO the ifcopenshell part is messing up, duplicate the libraries locally instead
+import bcf.v2.visinfo as VIS # type:ignore # TODO the ifcopenshell part is messing up, duplicate the libraries locally instead
+import bcf.v2.model as MDL # type: ignore # TODO the ifcopenshell part is messing up, duplicate the libraries locally instead
 
 from pathlib import Path
 
