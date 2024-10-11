@@ -36,7 +36,7 @@ The issue schema conforms to the BCF (BIM Collaboration Format) version 2.0 stan
 
 Setting up a virtual environment:
 ```
-python -m venv venv
+python -m env env
 ```
 
 Activating the virtual environment:
