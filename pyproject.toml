@@ -17,5 +17,4 @@ dependencies = [
 
 [tool.setuptools]
 packages = ["bettercorrectfast"]
-package-dir = {"" = "bettercorrectfast"}
 package-data = { "bettercorrectfast" = ["assets/*"] }
