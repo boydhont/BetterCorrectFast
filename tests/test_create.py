@@ -1,6 +1,6 @@
 # tests/test_create.py
 import unittest
-from better_correct_fast import *
+from bettercorrectfast import *
 from io import StringIO
 import sys
 

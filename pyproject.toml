@@ -16,4 +16,4 @@ dependencies = [
 ]
 
 [tool.setuptools]
-package-dir = {"" = "better_correct_fast"}
+package-dir = {"" = "bettercorrectfast"}
