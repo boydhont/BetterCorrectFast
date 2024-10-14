@@ -1,15 +1,16 @@
 # bettercorrectfast/bcf_two.py
 # -*- coding: utf-8 -*-
 
-# A wrapper for the undocumented IfcOpenShell wrapper
+# A fork for the undocumented IfcOpenShell wrapper
 # https://github.com/IfcOpenShell/IfcOpenShell/blob/v0.8.0/src/bcf/bcf/v2/bcfxml.py
 
 import uuid
 
-import bcf.v2.bcfxml as BCF # type: ignore # TODO the ifcopenshell part is messing up, duplicate the libraries locally instead
-import bcf.v2.topic as TOPIC # type: ignore # TODO the ifcopenshell part is messing up, duplicate the libraries locally instead
-import bcf.v2.visinfo as VIS # type:ignore # TODO the ifcopenshell part is messing up, duplicate the libraries locally instead
-import bcf.v2.model as MDL # type: ignore # TODO the ifcopenshell part is messing up, duplicate the libraries locally instead
+from .lib.bcf.v2 import bcfxml as BCF # TODO the ifcopenshell part is messing up, duplicate the libraries locally instead
+from .lib.bcf.v2 import topic as TOPIC  # TODO the ifcopenshell part is messing up, duplicate the libraries locally instead
+from .lib.bcf.v2 import visinfo as VIS  # TODO the ifcopenshell part is messing up, duplicate the libraries locally instead
+from .lib.bcf.v2 import model as MDL  # TODO the ifcopenshell part is messing up, duplicate the libraries locally instead
+from .lib.bcf.v2.model import visinfo as vi
 
 from pathlib import Path
 
@@ -62,7 +63,7 @@ def _get_image_bytes_from_filepath(filepath):
 
 def _get_visualization_info():
     
-    visualization_info = MDL.VisualizationInfo(
+    visualization_info = vi.VisualizationInfo(
         guid=str(uuid.uuid4()),  # Generate a random GUID
     )
     
