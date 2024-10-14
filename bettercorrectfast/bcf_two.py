@@ -25,6 +25,10 @@ def create(title="BetterCorrectFast: Check this out!", description="Automaticall
 
     return bcf
 
+def save(bcf, filepath):
+    bcf.save(filepath)
+
+
 def _get_topic(title, description, image_filepath, author="BetterCorrectFast", topic_type="Issue", topic_status="Open"): # TODO come up with better placeholder values
 
     # Create the elements
@@ -79,3 +83,5 @@ def _get_default_snapshot_path(): # TODO might be unsafe if the filepath does no
     
     if not snapshot_path_exists: return None
     return str(snapshot_path)
+
+__all__ = ["create", "save"]  # Specify public API

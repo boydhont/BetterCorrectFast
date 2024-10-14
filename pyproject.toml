@@ -1,16 +1,16 @@
 [build-system]
-requires = ["setuptools>=42", "wheel"]
+requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "bettercorrectfast"  # Ensure this matches the import statement
-version = "0.1.5"
+version = "0.1.8"
 description = "Simplified BIM Collaboration Format (BCF) generation for project leaders and managers"
 authors = [
     { name = "Boy d'Hont", email = "contact@bdhont.net" },
 ]
 license = { text = "MIT" }
-requires-python = ">=3.8"
+requires-python = ">=3.10"
 dependencies = [
     "xsdata",
     "numpy",

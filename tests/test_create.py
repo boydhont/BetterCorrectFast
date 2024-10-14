@@ -13,7 +13,7 @@ class TestCreate(unittest.TestCase):
         # Call the function
         debug_bcf = create()
         print(debug_bcf)
-        debug_bcf.save("tests/debug.bcf")
+        save(debug_bcf, "tests/debug.bcf")
         
         # Reset redirect
         sys.stdout = sys.__stdout__
