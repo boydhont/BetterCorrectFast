@@ -6,11 +6,11 @@
 
 import uuid
 
-from .lib.bcf.v2 import bcfxml as BCF # TODO the ifcopenshell part is messing up, duplicate the libraries locally instead
-from .lib.bcf.v2 import topic as TOPIC  # TODO the ifcopenshell part is messing up, duplicate the libraries locally instead
-from .lib.bcf.v2 import visinfo as VIS  # TODO the ifcopenshell part is messing up, duplicate the libraries locally instead
-from .lib.bcf.v2 import model as MDL  # TODO the ifcopenshell part is messing up, duplicate the libraries locally instead
-from .lib.bcf.v2.model import visinfo as vi
+from .bcf.v2 import bcfxml as BCF # TODO the ifcopenshell part is messing up, duplicate the libraries locally instead
+from .bcf.v2 import topic as TOPIC  # TODO the ifcopenshell part is messing up, duplicate the libraries locally instead
+from .bcf.v2 import visinfo as VIS  # TODO the ifcopenshell part is messing up, duplicate the libraries locally instead
+from .bcf.v2 import model as MDL  # TODO the ifcopenshell part is messing up, duplicate the libraries locally instead
+from .bcf.v2.model import visinfo as vi
 
 from pathlib import Path
 
