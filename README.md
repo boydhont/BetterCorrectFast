@@ -17,7 +17,7 @@ Create and save an issue locally:
 ```
 import bettercorrectfast as bcf
 
-issue = bcf.create("Title", "Description", "Screenshot.jpg")
+issue = bcf.create("Title", "Description", "Screenshot.png")
 bcf.save(issue, "issue.bcf")
 ```
 
