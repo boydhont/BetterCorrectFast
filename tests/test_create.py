@@ -11,7 +11,8 @@ class TestCreate(unittest.TestCase):
         sys.stdout = captured_output
         
         # Call the function
-        debug_bcf = create()
+        debug_ifcguids = ["1rDWROW8j2v8TxahWHKI_E", "1rDWROW8j2v8TxahWHKap1"]
+        debug_bcf = create(ifc_guids=debug_ifcguids)
         print(debug_bcf)
         save(debug_bcf, "tests/debug.bcf")
         

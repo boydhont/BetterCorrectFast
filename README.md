@@ -21,7 +21,7 @@ issue = bcf.create("Title", "Description", "Screenshot.png")
 bcf.save(issue, "issue.bcf")
 ```
 
-It is also possible to add a title, description and/or snapshot to the issue:
+It is also possible to add a title, description, snapshot and/or ifc-guids to the issue:
 
 ```
 issue_from_text = bcf.create("Title", "Description")
@@ -29,11 +29,13 @@ issue_from_text = bcf.create("Title", "Description")
 issue_from_title = bcf.create(title="Title)
 issue_from_description = bcf.create(description="Description")
 issue_from_image = bcf.create(image_filepath="Screenshot.jpg")
+issue_from_ifc_guids = bcf.create(ifc_guids=["1rDWROW8j2v8TxahWHKI_E", "1rDWROW8j2v8TxahWHKap1"])
 ```
+
 
 ## Technical Notes
 
-The issue schema conforms to the BCF (BIM Collaboration Format) version 2.0 standard as defined by buildingSMART International.
+The issue schema conforms to the BCF (BIM Collaboration Format) version 2.1 standard as defined by buildingSMART International.
 
 **Note:** This library currently supports image snapshots exclusively in .png format. Support for .jpg format is in development.
 

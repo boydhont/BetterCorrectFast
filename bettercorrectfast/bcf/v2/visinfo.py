@@ -227,14 +227,14 @@ class VisualizationInfoHandler:
         guids = [e.GlobalId for e in elements]
         components = visualization_info.components
         if not components:
-            visibility = mdl.ComponentVisibility(default_visibility=True)
+            visibility = vi.ComponentVisibility(default_visibility=True)
             components = vi.Components(visibility=visibility)
             visualization_info.components = components
 
         selection = components.selection
-        components_list = [mdl.Component(ifc_guid=guid) for guid in guids]
+        components_list = [vi.Component(ifc_guid=guid) for guid in guids]
         if not selection:
-            selection = mdl.ComponentSelection()
+            selection = vi.ComponentSelection()
             components.selection = selection
         selection.component = components_list
 
@@ -251,23 +251,23 @@ class VisualizationInfoHandler:
         default_visibility = elements_visibility == "HIDDEN"
 
         guids = [e.GlobalId for e in elements]
-        components_list = [mdl.Component(ifc_guid=guid) for guid in guids]
+        components_list = [vi.Component(ifc_guid=guid) for guid in guids]
         components = visualization_info.components
         if not components:
-            visibility = mdl.ComponentVisibility(default_visibility=default_visibility)
+            visibility = vi.ComponentVisibility(default_visibility=default_visibility)
             components = vi.Components(visibility=visibility)
             visualization_info.components = components
 
         visibility = components.visibility
         if not visibility:
-            visibility = mdl.ComponentVisibility(default_visibility=default_visibility)
+            visibility = vi.ComponentVisibility(default_visibility=default_visibility)
             components.visibility = visibility
         elif visibility.default_visibility != default_visibility:
             visibility.default_visibility = default_visibility
 
         exceptions = visibility.exceptions
         if not exceptions:
-            exceptions = mdl.ComponentVisibilityExceptions()
+            exceptions = vi.ComponentVisibilityExceptions()
             visibility.exceptions = exceptions
         exceptions.component = components_list
 
@@ -358,10 +358,10 @@ def build_components(*guids: str) -> vi.Components:
     Returns:
         The BCF components definition.
     """
-    components = [mdl.Component(ifc_guid=guid) for guid in guids]
+    components = [vi.Component(ifc_guid=guid) for guid in guids]
     return vi.Components(
-        selection=mdl.ComponentSelection(component=components),
-        visibility=mdl.ComponentVisibility(default_visibility=True),
+        selection=vi.ComponentSelection(component=components),
+        visibility=vi.ComponentVisibility(default_visibility=True),
     )
 
 
@@ -392,9 +392,9 @@ def build_camera_from_vectors(
     Returns:
         The BCF camera definition.
     """
-    camera_viewpoint = mdl.Point(x=camera_position[0], y=camera_position[1], z=camera_position[2])
-    camera_direction = mdl.Direction(x=camera_dir[0], y=camera_dir[1], z=camera_dir[2])
-    camera_up_vector = mdl.Direction(x=camera_up[0], y=camera_up[1], z=camera_up[2])
+    camera_viewpoint = vi.Point(x=camera_position[0], y=camera_position[1], z=camera_position[2])
+    camera_direction = vi.Direction(x=camera_dir[0], y=camera_dir[1], z=camera_dir[2])
+    camera_up_vector = vi.Direction(x=camera_up[0], y=camera_up[1], z=camera_up[2])
     return vi.PerspectiveCamera(
         camera_view_point=camera_viewpoint,
         camera_direction=camera_direction,

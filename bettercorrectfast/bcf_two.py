@@ -14,11 +14,11 @@ from .bcf.v2.model import visinfo as vi
 
 from pathlib import Path
 
-def create(title="BetterCorrectFast: Check this out!", description="Automatically generated topic by BetterCorrectFast", image_filepath=None, project_name=""): # TODO come up with a better alias # TODO come up with better placeholder values
+def create(title="BetterCorrectFast: Check this out!", description="Automatically generated topic by BetterCorrectFast", image_filepath=None, project_name="", ifc_guids = []): # TODO come up with a better alias # TODO come up with better placeholder values
     
     # Create the elements
     bcf = BCF.BcfXml().create_new(project_name)
-    topic = _get_topic(title, description, image_filepath)
+    topic = _get_topic(title, description, image_filepath, ifc_guids)
     
     # Add the elements
     bcf.topics[topic.guid] = topic
@@ -29,7 +29,7 @@ def save(bcf, filepath):
     bcf.save(filepath)
 
 
-def _get_topic(title, description, image_filepath, author="BetterCorrectFast", topic_type="Issue", topic_status="Open"): # TODO come up with better placeholder values
+def _get_topic(title, description, image_filepath, ifc_guids, author="BetterCorrectFast", topic_type="Issue", topic_status="Open"): # TODO come up with better placeholder values
 
     # Create the elements
     topic = TOPIC.TopicHandler().create_new(
@@ -40,16 +40,16 @@ def _get_topic(title, description, image_filepath, author="BetterCorrectFast", t
         topic_status=topic_status
     )
 
-    visualization_info_handler = _get_visualization_info_handler(image_filepath) # TODO insert the image filepath here # TODO add user input for the picture
+    visualization_info_handler = _get_visualization_info_handler(image_filepath, ifc_guids) # TODO insert the image filepath here # TODO add user input for the picture
     
     # Add the elements
     topic.add_visinfo_handler(visualization_info_handler, snapshot_filename="snapshot.png")
  
     return topic
 
-def _get_visualization_info_handler(image_filepath):
+def _get_visualization_info_handler(image_filepath, ifc_guids):
     
-    visualization_info = _get_visualization_info()
+    visualization_info = _get_visualization_info(ifc_guids)
     
     image_filepath = image_filepath if image_filepath is not None else _get_default_snapshot_path()
     image_bytes = _get_image_bytes_from_filepath(image_filepath)
@@ -65,10 +65,17 @@ def _get_image_bytes_from_filepath(filepath):
     except:
         return None # TODO check if return None is ok to begin with
 
-def _get_visualization_info():
+def _get_visualization_info(ifc_guids):
     
     visualization_info = vi.VisualizationInfo(
         guid=str(uuid.uuid4()),  # Generate a random GUID
+        components=VIS.build_components(*ifc_guids),
+        perspective_camera=vi.PerspectiveCamera(
+            camera_view_point=vi.Point(x=0, y=0, z=0),
+            camera_direction=vi.Direction(x=0, y=1, z=0),
+            camera_up_vector=vi.Direction(x=0, y=0, z=1),
+            field_of_view=60.0,
+        )
     )
     
     return visualization_info
