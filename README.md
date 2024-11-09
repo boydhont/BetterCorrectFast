@@ -4,7 +4,7 @@ Simplified BIM Collaboration Format (BCF) generation for project leaders and man
 
 ![](bettercorrectfast/assets/icon.jpg)
 
-[![PyPI](https://img.shields.io/pypi/v/bcf-client?label=PyPI&color=006dad)](https://pypi.org/project/bettercorrectfast/)
+[![PyPI](https://img.shields.io/pypi/v/bettercorrectfast?label=PyPI&color=006dad)](https://pypi.org/project/bettercorrectfast/)
 
 ## Usage
 
